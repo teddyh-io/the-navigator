@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Navigator</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel: Search & Inventory -->
+        <div class="left-panel">
+            <div class="header">
+                <img src="LOGO.png" alt="The Navigator Inventory Finder" class="logo">
+            </div>
+
+            <!-- Search Screen -->
+            <div id="searchScreen" class="search-screen">
+                <div class="search-content">
+                    <div class="search-intro">
+                        <h2>Search for Inventory</h2>
+                        <p>You must be a registered user to use the search.</p>
+                    </div>
+                    <form id="searchForm">
+                        <div class="form-group">
+                            <label for="username">Access Code</label>
+                            <input type="password" id="username" placeholder="your access code" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="radius">Radius (miles)</label>
+                            <div class="slider-container">
+                                <div class="slider-value">
+                                    <span id="radiusValue">30</span>
+                                    <span style="font-size: 12px; color: #999;">miles</span>
+                                </div>
+                                <input type="range" id="radius" class="radius-slider" min="5" max="150" value="30" step="5">
+                            </div>
+                        </div>
+                        <button type="submit" class="search-btn">
+                            <span class="btn-text">Search Warehouses</span>
+                            <span class="loader" style="display: none;"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="results-screen" style="display: none;">
+                <div class="results-header">
+                    <button id="backBtn" class="back-btn">← Back to Search</button>
+                    <h2>Available Inventory</h2>
+                    <p class="summary" id="summary"></p>
+                </div>
+                
+                <div id="noResults" style="display: none;" class="no-results">
+                    <div class="icon">😿</div>
+                    <h3>No Stock Available</h3>
+                    <p>There are no warehouses with inventory in your search area. Try increasing your search radius.</p>
+                </div>
+
+                <div id="warehousesList" class="warehouses-list"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Map -->
+        <div class="right-panel">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
