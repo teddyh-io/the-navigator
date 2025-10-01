@@ -203,8 +203,7 @@ function displayWarehouses(data) {
 
 // Fetch data from API
 async function fetchInventory(username, radius) {
-    const zip = '02215'; // Default zip code from Boston area
-    const apiUrl = `https://eow4gra92oz16n8.m.pipedream.net?zip=${zip}&radius=${radius}&user=${username}`;
+    const apiUrl = `https://eow4gra92oz16n8.m.pipedream.net?radius=${radius}&user=${username}`;
     
     try {
         const response = await fetch(apiUrl, {
