@@ -268,10 +268,14 @@ body {
 .summary {
     font-size: 14px;
     color: #666;
-    margin-bottom: 20px;
-    padding: 12px;
-    background: #f8f9fa;
-    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* Hide tabs on desktop */
+@media (min-width: 1025px) {
+    .mobile-tabs {
+        display: none !important;
+    }
 }
 
 .no-results {
@@ -492,20 +496,114 @@ body {
     margin: 4px 0;
 }
 
+/* Mobile Tab Navigation */
+.mobile-tabs {
+    display: none;
+    background: #e0e0e0;
+    border-radius: 8px;
+    padding: 2px;
+    gap: 2px;
+}
+
+.mobile-tabs .tab-btn {
+    flex: 1;
+    padding: 6px 12px;
+    background: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+.mobile-tabs .tab-btn.active {
+    background: white;
+    color: #333;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-tabs .tab-btn:hover:not(.active) {
+    color: #333;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
     }
 
+    /* Show mobile tabs */
+    .mobile-tabs {
+        display: flex;
+    }
+
     .left-panel {
         width: 100%;
-        height: 70%;
+        height: 100vh;
     }
 
     .right-panel {
         width: 100%;
-        height: 30%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none; /* Hidden by default, shown when map tab is active */
+    }
+
+    /* When map tab is active */
+    body.map-active .left-panel .search-screen {
+        display: none;
+    }
+
+    body.map-active .left-panel .warehouses-list {
+        display: none !important;
+    }
+
+    body.map-active .left-panel .no-results {
+        display: none !important;
+    }
+
+    body.map-active .right-panel {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+    }
+
+    body.map-active .left-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        background: transparent;
+        pointer-events: none;
+        height: auto;
+    }
+
+    body.map-active .left-panel .header,
+    body.map-active .left-panel .results-header {
+        pointer-events: auto;
+    }
+
+    body.map-active .left-panel .results-screen {
+        background: transparent;
+    }
+
+    /* When list tab is active (default), show list */
+    body.list-active .left-panel {
+        display: flex;
+    }
+
+    body.list-active .right-panel {
+        display: none;
     }
 }
 

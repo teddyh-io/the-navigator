@@ -2,6 +2,7 @@
 let map;
 let markers = [];
 let warehousesData = [];
+let currentBounds = null;
 
 // Initialize the map centered on the US
 function initMap() {
@@ -101,6 +102,7 @@ function addMarkers(warehouses) {
     
     // Fit map to show all markers
     if (bounds.length > 0) {
+        currentBounds = bounds;
         map.fitBounds(bounds, { padding: [50, 50] });
     }
 }
@@ -146,11 +148,22 @@ function displayWarehouses(data) {
     if (!data.warehouses || data.warehouses.length === 0) {
         noResults.style.display = 'flex';
         summary.textContent = '';
+        // Hide summary container on mobile when no results
+        const summaryContainer = summary.closest('.summary-container');
+        if (summaryContainer) {
+            summaryContainer.style.display = 'none';
+        }
         return;
     }
     
     noResults.style.display = 'none';
     summary.textContent = `Found ${data.totalWarehouses} warehouse${data.totalWarehouses !== 1 ? 's' : ''} with ${data.totalProducts} product${data.totalProducts !== 1 ? 's' : ''} in stock`;
+    
+    // Show summary container when there are results
+    const summaryContainer = summary.closest('.summary-container');
+    if (summaryContainer) {
+        summaryContainer.style.display = 'block';
+    }
     
     data.warehouses.forEach((warehouse, index) => {
         const card = document.createElement('div');
@@ -195,6 +208,14 @@ function displayWarehouses(data) {
             highlightWarehouse(index);
             // Open marker popup
             markers[index].openPopup();
+            
+            // On mobile, switch to map tab
+            if (window.innerWidth <= 1024) {
+                const mapTabBtn = document.querySelector('.tab-btn[data-tab="map"]');
+                if (mapTabBtn) {
+                    mapTabBtn.click();
+                }
+            }
         });
         
         warehousesList.appendChild(card);
@@ -282,9 +303,49 @@ document.getElementById('backBtn').addEventListener('click', () => {
     showSearch();
 });
 
+// Mobile tab switching
+function setupMobileTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tab = button.getAttribute('data-tab');
+            
+            // Update active state on buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Update body class to show/hide panels
+            if (tab === 'map') {
+                document.body.classList.remove('list-active');
+                document.body.classList.add('map-active');
+                // Invalidate map size to ensure it renders correctly and refit bounds
+                setTimeout(() => {
+                    if (map) {
+                        map.invalidateSize();
+                        // Refit bounds to show all markers
+                        if (currentBounds && currentBounds.length > 0) {
+                            map.fitBounds(currentBounds, { padding: [50, 50] });
+                        }
+                    }
+                }, 100);
+            } else {
+                document.body.classList.remove('map-active');
+                document.body.classList.add('list-active');
+            }
+        });
+    });
+}
+
 // Initialize map on page load
 window.addEventListener('load', () => {
     initMap();
+    
+    // Setup mobile tabs
+    setupMobileTabs();
+    
+    // Set initial state to list view on mobile
+    document.body.classList.add('list-active');
     
     // Load saved access code if available
     const savedAccessCode = localStorage.getItem('accessCode');

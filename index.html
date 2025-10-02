@@ -12,7 +12,7 @@
         <!-- Left Panel: Search & Inventory -->
         <div class="left-panel">
             <div class="header">
-                <img src="LOGO.png" alt="The Navigator Inventory Finder" class="logo">
+                <img src="logo.png" alt="The Navigator Inventory Finder" class="logo">
             </div>
 
             <!-- Search Screen -->
@@ -51,6 +51,11 @@
                     <button id="backBtn" class="back-btn">← Back to Search</button>
                     <h2>Available Inventory</h2>
                     <p class="summary" id="summary"></p>
+                    <!-- Mobile Tab Navigation -->
+                    <div class="mobile-tabs">
+                        <button class="tab-btn active" data-tab="list">List View</button>
+                        <button class="tab-btn" data-tab="map">Map View</button>
+                    </div>
                 </div>
                 
                 <div id="noResults" style="display: none;" class="no-results">
