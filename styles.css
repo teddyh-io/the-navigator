@@ -79,7 +79,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .form-group {
@@ -262,8 +262,6 @@ body {
 }
 
 .warehouses-list {
-    flex: 1;
-    overflow-y: auto;
     padding: 30px;
 }
 
@@ -502,12 +500,12 @@ body {
 
     .left-panel {
         width: 100%;
-        height: 50%;
+        height: 70%;
     }
 
     .right-panel {
         width: 100%;
-        height: 50%;
+        height: 30%;
     }
 }
 

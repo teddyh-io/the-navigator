@@ -244,6 +244,9 @@ document.getElementById('searchForm').addEventListener('submit', async (e) => {
         const data = await fetchInventory(username, radius);
         warehousesData = data.warehouses || [];
         
+        // Save access code to localStorage after successful login
+        localStorage.setItem('accessCode', username);
+        
         displayWarehouses(data);
         addMarkers(warehousesData);
     } catch (error) {
@@ -282,5 +285,11 @@ document.getElementById('backBtn').addEventListener('click', () => {
 // Initialize map on page load
 window.addEventListener('load', () => {
     initMap();
+    
+    // Load saved access code if available
+    const savedAccessCode = localStorage.getItem('accessCode');
+    if (savedAccessCode) {
+        document.getElementById('username').value = savedAccessCode;
+    }
 });
 
