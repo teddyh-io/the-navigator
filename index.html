@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Navigator</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -49,7 +50,12 @@
             <div id="resultsScreen" class="results-screen" style="display: none;">
                 <div class="results-header">
                     <button id="backBtn" class="back-btn">← Back to Search</button>
-                    <h2>Available Inventory</h2>
+                    <div class="header-title-row">
+                        <h2>Available Inventory</h2>
+                        <button id="downloadKmlBtn" class="icon-btn" title="Download KML file">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
                     <p class="summary" id="summary"></p>
                     <!-- Mobile Tab Navigation -->
                     <div class="mobile-tabs">

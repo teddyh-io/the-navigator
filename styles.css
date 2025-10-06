@@ -236,6 +236,13 @@ body {
     background: white;
 }
 
+.header-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
 .results-header h2 {
     font-size: 20px;
     margin-bottom: 10px;
@@ -328,17 +335,326 @@ body {
     background: #f5f5f5;
 }
 
-.warehouse-header {
+.warehouse-card.out-of-stock-card {
+    opacity: 0.75;
+    border-color: #d1d5db;
+}
+
+.warehouse-card.out-of-stock-card:hover {
+    opacity: 1;
+    border-color: #dc2626;
+}
+
+.warehouse-divider {
+    margin: 30px 0;
+    text-align: center;
+    position: relative;
+}
+
+.warehouse-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d1d5db 20%, #d1d5db 80%, transparent);
+}
+
+.warehouse-divider span {
+    position: relative;
+    background: white;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* RestockIQ Widget Styles */
+.restock-iq-widget {
+    margin: 16px 0;
+    padding: 16px;
+    background: linear-gradient(135deg, #e8eef5 0%, #dde5f0 100%);
+    border-radius: 12px;
+    border: 1px solid #c5d4e6;
+}
+
+.restock-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
 }
 
+.restock-brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #1e3a8a;
+}
+
+.restock-brand svg {
+    color: #1e3a8a;
+}
+
+.restock-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.badge-highly-competitive {
+    background: #dc2626;
+    color: white;
+}
+
+.badge-competitive {
+    background: #f59e0b;
+    color: white;
+}
+
+.badge-less-competitive {
+    background: #84cc16;
+    color: white;
+}
+
+.restock-content {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    position: relative;
+    gap: 8px;
+}
+
+.restock-content::before {
+    content: '';
+    position: absolute;
+    left: 15%;
+    right: 0;
+    top: 35%;
+    height: 3px;
+    width: 70%;
+    background: #1e40af;
+    z-index: 0;
+}
+
+/* Hide line for in-stock widgets */
+.in-stock-widget .restock-content::before {
+    display: none;
+}
+
+.restock-section {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.restock-circle {
+    width: 16px;
+    height: 16px;
+    background: #1e40af;
+    border: 3px solid #e8eef5;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin: 4px 0;
+}
+
+.restock-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.restock-date {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    margin-top: 4px;
+}
+
+.restock-time {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.restock-duration {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.restock-timeline-duration {
+    flex: 1.5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+.timeline-value {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.out-section {
+    color: #dc2626 !important;
+}
+
+.restock-section {
+    color: #000000;
+}
+
+.duration-section .restock-label {
+    color: #1e3a8a;
+}
+
+.duration-section .restock-circle {
+    display: none;
+}
+
+/* Hide circles for in-stock widgets */
+.in-stock-widget .restock-circle {
+    display: none;
+}
+
+.historic-info {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid #dc2626;
+}
+
+.historic-item {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.historic-item:last-child {
+    margin-bottom: 0;
+}
+
+.no-stock-inline {
+    padding: 30px;
+}
+
+.no-stock-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+}
+
+.no-stock-content .icon {
+    font-size: 48px;
+    flex-shrink: 0;
+}
+
+.no-stock-text h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.no-stock-text p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.warehouse-distance-label {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.warehouse-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
 .warehouse-name {
     font-size: 18px;
     font-weight: 600;
     color: #333;
+}
+
+.warehouse-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4b5563;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-width: 0;
+}
+
+.icon-btn:hover {
+    background: #d1d5db;
+    transform: scale(1.05);
+}
+
+.icon-btn i {
+    font-size: 14px;
+}
+
+.warehouse-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.warehouse-distance {
+    font-weight: 600;
+    color: #E32A36;
+}
+
+.warehouse-phone {
+    color: #666;
 }
 
 .maps-link-header {
@@ -406,7 +722,6 @@ body {
     padding: 12px;
     background: #f8f9fa;
     border-radius: 8px;
-    border-left: 3px solid #E32A36;
 }
 
 .product-name {
@@ -530,6 +845,59 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+    .restock-iq-widget {
+        padding: 12px;
+    }
+    
+    .restock-brand {
+        font-size: 12px;
+    }
+    
+    .restock-badge {
+        padding: 4px 8px;
+        font-size: 8px;
+    }
+    
+    .restock-content {
+        gap: 4px;
+    }
+    
+    .restock-label {
+        font-size: 8px;
+    }
+    
+    .restock-date {
+        font-size: 18px;
+    }
+    
+    .restock-time {
+        font-size: 9px;
+    }
+    
+    .restock-duration {
+        font-size: 14px;
+    }
+    
+    .timeline-label {
+        font-size: 8px;
+    }
+    
+    .timeline-value {
+        font-size: 10px;
+    }
+    
+    .restock-circle {
+        width: 14px;
+        height: 14px;
+        border-width: 2px;
+    }
+    
+    .restock-content::before {
+        height: 2px;
+    }
+}
+
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
