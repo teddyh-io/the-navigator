@@ -21,28 +21,110 @@
                 <div class="search-content">
                     <div class="search-intro">
                         <h2>Search for Inventory</h2>
-                        <p>You must be a registered user to use the search.</p>
+                        <p>Please enter your email address to continue.</p>
+                    </div>
+                    <div id="returningUserBanner" class="returning-user-banner" style="display: none;">
+                        <div class="banner-top">
+                            <span id="returningUserText">Searching as <strong></strong></span>
+                            <span id="planPill" class="plan-pill"></span>
+                        </div>
+                        <div class="banner-divider"></div>
+                        <div class="banner-bottom">
+                            <a href="https://billing.stripe.com/p/login/3cI7sMek06rS0Aiblk3AY00" target="_blank" class="manage-subscription-link">Manage Subscription</a>
+                            <a href="#" id="notYouLink">Not you?</a>
+                        </div>
                     </div>
                     <form id="searchForm">
-                        <div class="form-group">
-                            <label for="username">Access Code</label>
-                            <input type="password" id="username" placeholder="your access code" value="" required>
+                        <div class="form-group" id="emailGroup">
+                            <label for="userEmail">Email Address</label>
+                            <input type="email" id="userEmail" placeholder="scrooge@mcduckventures.online" value="" required>
                         </div>
-                        <div class="form-group">
-                            <label for="radius">Radius (miles)</label>
-                            <div class="slider-container">
-                                <div class="slider-value">
-                                    <span id="radiusValue">30</span>
-                                    <span style="font-size: 12px; color: #999;">miles</span>
+                        <div id="searchOptions" style="display: none;">
+                            <div class="form-group" id="zipSelectorGroup">
+                                <label for="zipInput">ZIP Code</label>
+                                <input type="text" id="zipInput" list="zipCodes" placeholder="Select or enter ZIP code" pattern="[0-9]{5}" maxlength="5" autocomplete="off">
+                                <datalist id="zipCodes">
+                                </datalist>
+                                <div id="zipHelper" class="zip-helper" style="display: none;">
+                                    <span id="zipCount"></span>
                                 </div>
-                                <input type="range" id="radius" class="radius-slider" min="5" max="150" value="30" step="5">
+                            </div>
+                            <div class="form-group" id="radiusGroup">
+                                <label for="radius">Radius (miles)</label>
+                                <div class="slider-container">
+                                    <div class="slider-value">
+                                        <span id="radiusValue">30</span>
+                                        <span style="font-size: 12px; color: #999;">miles</span>
+                                    </div>
+                                    <input type="range" id="radius" class="radius-slider" min="5" max="150" value="30" step="5">
+                                </div>
                             </div>
                         </div>
                         <button type="submit" class="search-btn">
-                            <span class="btn-text">Search Warehouses</span>
+                            <span class="btn-text" id="submitBtnText">Next</span>
                             <span class="loader" style="display: none;"></span>
                         </button>
+                        <div id="searchesRemaining" class="searches-remaining" style="display: none;">
+                            <span id="searchesRemainingText"></span>
+                        </div>
+                        <div id="reloadLastSearchLink" class="reload-search-link" style="display: none;">
+                            <a href="#" id="reloadSearchBtn">↻ Reload last search result</a>
+                        </div>
                     </form>
+                    
+                    <!-- Subscription Box -->
+                    <div id="subscriptionBox" class="subscription-box">
+                        <div class="subscription-header">
+                            <h3>Not a member yet?</h3>
+                            <p>Subscribe now to search for metals inventory across warehouses nationwide.</p>
+                        </div>
+                        
+                        <div class="subscription-plans">
+                            <div class="plan-card">
+                                <div class="plan-info">
+                                    <div class="plan-name">BASIC</div>
+                                    <div class="plan-price">
+                                        <span class="price-amount">$19.99</span>
+                                        <span class="price-period">/month</span>
+                                    </div>
+                                </div>
+                                <div class="plan-features">
+                                    <div class="feature">✓ 2 searches a day</div>
+                                    <div class="feature">✓ 2 zip codes</div>
+                                </div>
+                                <a href="https://buy.stripe.com/3cI7sMek06rS0Aiblk3AY00" class="subscribe-btn">Subscribe</a>
+                            </div>
+                            
+                            <div class="plan-card plan-plus">
+                                <div class="plan-badge">RECOMMENDED</div>
+                                <div class="plan-info">
+                                    <div class="plan-name">PLUS</div>
+                                    <div class="plan-price">
+                                        <span class="price-amount">$29.99</span>
+                                        <span class="price-period">/month</span>
+                                    </div>
+                                </div>
+                                <div class="plan-features">
+                                    <div class="feature">✓ 5 searches a day</div>
+                                    <div class="feature">✓ 5 zip codes</div>
+                                    <div class="feature">✓ KML Export</div>
+                                    <div class="feature">✓ Autocheck</div>
+                                    <div class="feature-detail">Get an email when your area restocks</div>
+                                    <div class="feature feature-restockiq">
+                                        <span>✓</span>
+                                        <div class="restock-brand-inline">
+                                            <span>restockIQ</span>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="feature-detail">View store competitiveness and restock predictions</div>
+                                </div>
+                                <a href="https://buy.stripe.com/9B614ocbS03u1Emblk3AY01" class="subscribe-btn subscribe-btn-plus">Subscribe</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -81,7 +163,7 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="app.js"></script>
+    <script src="app-min.js"></script>
 </body>
 </html>
 
